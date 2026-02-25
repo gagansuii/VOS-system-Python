@@ -11,6 +11,7 @@ This is an initial scaffold for a real-time virtual outfit overlay system using 
    - `python -m pip install -r requirements.txt`
 3. Download MediaPipe Tasks models (recommended for accuracy):
    - `python scripts/download_models.py`
+   - This prefers the heavy pose model and falls back to full if needed.
 4. Add outfit images:
    - Upper garments in `data/outfits/upper/`
    - Lower garments in `data/outfits/lower/`

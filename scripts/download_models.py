@@ -44,12 +44,21 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    pose_variants = list(POSE_MODEL_NAMES.keys()) if args.all else [POSE_MODEL_PREFERRED]
-
-    for variant in pose_variants:
-        name = POSE_MODEL_NAMES[variant]
-        url = POSE_MODEL_URLS[variant]
-        _download(url, MODELS_DIR / name)
+    if args.all:
+        pose_variants = list(POSE_MODEL_NAMES.keys())
+        for variant in pose_variants:
+            name = POSE_MODEL_NAMES[variant]
+            url = POSE_MODEL_URLS[variant]
+            _download(url, MODELS_DIR / name)
+    else:
+        preferred = POSE_MODEL_PREFERRED
+        name = POSE_MODEL_NAMES[preferred]
+        url = POSE_MODEL_URLS[preferred]
+        ok = _download(url, MODELS_DIR / name)
+        if not ok and preferred != "full":
+            name = POSE_MODEL_NAMES["full"]
+            url = POSE_MODEL_URLS["full"]
+            _download(url, MODELS_DIR / name)
 
     _download(SEGMENTER_MODEL_URL, MODELS_DIR / SEGMENTER_MODEL_NAME)
     return 0

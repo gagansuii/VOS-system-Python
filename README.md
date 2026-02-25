@@ -9,11 +9,13 @@ This is an initial scaffold for a real-time virtual outfit overlay system using 
    - `.venv\Scripts\activate`
 2. Install dependencies:
    - `python -m pip install -r requirements.txt`
-3. Add outfit images:
+3. Download MediaPipe Tasks models (recommended for accuracy):
+   - `python scripts/download_models.py`
+4. Add outfit images:
    - Upper garments in `data/outfits/upper/`
    - Lower garments in `data/outfits/lower/`
    - Use PNGs with transparent backgrounds for best results.
-4. Run:
+5. Run:
    - `python src/main.py --camera 0`
 
 If the camera window is black, try a different backend:
@@ -41,6 +43,7 @@ Run a web UI with camera access:
 
 ## Notes
 
-- This uses MediaPipe Pose + Selfie Segmentation for a lightweight real-time pipeline.
+- With models downloaded, this uses MediaPipe Tasks Pose Landmarker + Image Segmenter.
+- If models are missing, it falls back to a lightweight HOG-based detector (no true segmentation).
 - Alignment is heuristic and will need tuning for different body types and garments.
 - For higher fidelity, replace the overlay with a pose-guided warp model (future work).

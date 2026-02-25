@@ -91,6 +91,7 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
     estimator = PoseEstimator()
+    print(estimator.status())
     overlay = OverlayEngine()
     use_segmentation = not args.no_segmentation
     mode = args.mode
